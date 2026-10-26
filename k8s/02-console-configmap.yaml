@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redpanda-console-config
+  namespace: kafka
+data:
+  config.yaml: |
+    kafka:
+      brokers:
+        - prod-kafka-kafka-bootstrap.kafka.svc.cluster.local:9093
+      tls:
+        enabled: true
+        caFilepath: /etc/console/certs/ca.crt
+        certFilepath: /etc/console/certs/user.crt
+        keyFilepath: /etc/console/certs/user.key
+        insecureSkipTlsVerify: false
+    server:
+      listenAddress: "0.0.0.0"
+      listenPort: 8080
